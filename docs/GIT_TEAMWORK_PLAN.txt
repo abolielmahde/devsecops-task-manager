@@ -1,0 +1,25 @@
+Git Teamwork Plan
+
+Recommended branches:
+1. main - stable final version.
+2. dev - integration branch for the team.
+3. feature/backend-auth - login and register API.
+4. feature/backend-tasks - task and project API.
+5. feature/frontend-dashboard - React pages and UI.
+6. feature/devops-ci - Docker, GitHub Actions and scans.
+7. feature/docs-diagrams - documentation and diagrams.
+
+Recommended commit style:
+1. feat(auth): add user register and login API
+2. feat(tasks): add task CRUD endpoints
+3. feat(frontend): add dashboard and forms
+4. feat(docker): add compose services
+5. ci(security): add GitHub Actions scans
+6. docs: add features and use cases document
+7. docs: add UML and component diagrams
+
+Pull Request rules:
+1. Every feature branch opens a PR into dev.
+2. At least one teammate reviews the PR.
+3. PR is merged only after CI/CD checks pass.
+4. main receives only final tested code from dev.

@@ -1,0 +1,27 @@
+@startuml
+skinparam componentStyle rectangle
+actor User
+component "React Frontend" as Frontend {
+  [Auth Page]
+  [Dashboard]
+  [Project Form]
+  [Task Form]
+  [Task List]
+}
+component "Flask Backend API" as Backend {
+  [Auth Routes]
+  [Project Routes]
+  [Task Routes]
+  [Upload Handler]
+}
+database "PostgreSQL" as DB
+folder "Local Upload Storage" as Uploads
+cloud "GitHub Actions" as CI
+User --> Frontend
+Frontend --> Backend : REST API / JWT
+Backend --> DB : SQLAlchemy
+Backend --> Uploads : store files
+CI --> Frontend : build + audit
+CI --> Backend : tests + SAST
+CI --> Backend : Docker image scan
+@enduml

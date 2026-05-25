@@ -1,0 +1,30 @@
+@startuml
+class User {
+  +int id
+  +string username
+  +string email
+  +string password_hash
+  +string role
+  +datetime created_at
+}
+class Project {
+  +int id
+  +string name
+  +text description
+  +int owner_id
+  +datetime created_at
+}
+class Task {
+  +int id
+  +string title
+  +text description
+  +string status
+  +int owner_id
+  +int project_id
+  +string attachment
+  +datetime created_at
+}
+User "1" -- "many" Project : owns
+User "1" -- "many" Task : owns
+Project "1" -- "many" Task : contains
+@enduml

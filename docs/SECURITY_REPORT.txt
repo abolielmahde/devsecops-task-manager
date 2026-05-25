@@ -1,0 +1,22 @@
+Security Report
+
+Implemented security controls:
+1. Password hashing using Werkzeug generate_password_hash.
+2. JWT token authentication for protected API endpoints.
+3. Authorization checks: users can access only their own tasks and files.
+4. Environment variables are used for database URL, secret key and CORS origin.
+5. No production secrets are committed to GitHub; only .env.example files exist.
+6. File upload protection: allowed extensions, secure_filename and 5MB max file size.
+7. Docker containers use non-root user for backend runtime.
+8. GitHub Actions runs tests and security scans.
+
+Pipeline security scans:
+1. Bandit - Python static application security testing.
+2. npm audit - frontend dependency scanning.
+3. Gitleaks - secret scanning.
+4. Trivy - Docker image vulnerability scanning.
+
+Known limitations for academic demo:
+1. The project uses basic JWT authentication without refresh tokens.
+2. File storage is local by default; S3 can be added as an optional extension.
+3. Terraform is provided as an infrastructure template and requires real AWS values.

@@ -1,0 +1,57 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: devsecops-db
+    environment:
+      POSTGRES_DB: devsecops
+      POSTGRES_USER: devsecops
+      POSTGRES_PASSWORD: devsecops
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U devsecops -d devsecops"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - devsecops-net
+
+  backend:
+    build: ./backend
+    container_name: devsecops-backend
+    environment:
+      SECRET_KEY: ${SECRET_KEY:-change-this-in-production}
+      DATABASE_URL: postgresql://devsecops:devsecops@db:5432/devsecops
+      CORS_ORIGIN: http://localhost:5173
+      UPLOAD_DIR: /app/uploads
+      PORT: 5001
+    volumes:
+      - upload_data:/app/uploads
+    ports:
+      - "5001:5001"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - devsecops-net
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: http://localhost:5001/api
+    container_name: devsecops-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    networks:
+      - devsecops-net
+
+volumes:
+  postgres_data:
+  upload_data:
+
+networks:
+  devsecops-net:
+    driver: bridge

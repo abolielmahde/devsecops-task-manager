@@ -1,0 +1,29 @@
+DevSecOps Task Manager - Features and Use Cases
+
+System users:
+1. Guest user: can register and login.
+2. Authenticated user: can create projects, create tasks, update task status, delete tasks and upload files.
+3. Development team: works with Git branches, Pull Requests, Issues, code review and CI/CD checks.
+
+Main features:
+1. User registration and login.
+2. Passwords are stored as hashes, not plain text.
+3. JWT token authentication for protected API routes.
+4. Project management: create and list projects.
+5. Task management: create, list, update status and delete tasks.
+6. File upload with allowed file extensions and secure filenames.
+7. PostgreSQL database in Docker Compose.
+8. React frontend dashboard.
+9. Flask backend REST API.
+10. GitHub Actions pipeline for tests, build and security scanning.
+11. Docker image build and image scanning.
+12. Terraform infrastructure example for AWS EC2.
+
+Main use cases:
+1. A new user opens the website, registers and logs in.
+2. The user creates a project such as "Security Sprint".
+3. The user creates tasks under the project.
+4. The user updates task status from todo to doing to done.
+5. The user uploads a file to a task.
+6. A developer opens a feature branch, commits a module, opens a Pull Request and waits for CI/CD security checks.
+7. The team fixes vulnerabilities or failed tests before merging to dev/main.
